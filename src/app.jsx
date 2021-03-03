@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,25 +15,42 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+function SimpleDialog(props) {
+    const { onClose, open } = props;
+
+    const handleClose = () => {
+        onClose();
+    };
+
+    return (
+        <Dialog onClose={handleClose} aria-labelledby="hello-world-dialog" open={open}>
+            {/* <DialogTitle id="hello-world-dialog-title">Hello World!</DialogTitle> */}
+            <p>Hello World, from Daniel Clancy</p>
+        </Dialog>
+    );
+}
+
+SimpleDialog.propTypes = {
+    open: PropTypes.bool.isRequired,
+}
+
 export default function App() {
+    const [open, setOpen] = React.useState(false);
+    
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const classes = useStyles();
 
     return (
         <div>
-            <Typography variant="h1">DroneDogs</Typography>
-            <form className="{classes.root}" noValidate autoComplete="off">
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <TextField id="outline-basic" label="Beef Hotdogs" variant="outlined" />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField id="outline-basic" label="Pork Hotdogs" variant="outlined" />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField id="outline-basic" label="Chicken Hotdogs" variant="outlined" />
-                    </Grid>
-                </Grid>
-            </form>
+            <Button variant="contained" color="primary" onClick={handleClickOpen}>Click me</Button>
+            <SimpleDialog open={open} onClose={handleClose} />
         </div>
         
     );
