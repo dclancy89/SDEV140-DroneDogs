@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import logo from './assets/images/DroneDog.jpg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,54 +16,65 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 
-    flex: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignitems: 'center',
+    logo: {
+        maxWidth: '250px',
     },
 
-    dialogText: {
-        padding: '2rem',
+    title: {
+        color: 'crimson',
+    },
+
+    flexCenter: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+
+    flexAround: {
+        display: 'flex',
+        justifyContent: 'space-around',
     }
+
 }));
 
-function SimpleDialog(props) {
-    const { onClose, open } = props;
-
-    const handleClose = () => {
-        onClose();
-    };
-
-    const classes = useStyles();
-
-    return (
-        <Dialog onClose={handleClose} aria-labelledby="hello-world-dialog" open={open}>
-            <p className={classes.dialogText}>Hello World, from Daniel Clancy</p>
-        </Dialog>
-    );
-}
-
-SimpleDialog.propTypes = {
-    open: PropTypes.bool.isRequired,
-}
 
 export default function App() {
-    const [open, setOpen] = React.useState(false);
     
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     const classes = useStyles();
 
     return (
-        <div className={classes.flex}>
-            <Button variant="contained" color="primary" onClick={handleClickOpen}>Click me</Button>
-            <SimpleDialog open={open} onClose={handleClose} />
+        <div>
+            
+            <Grid container spacing={4} className={classes.flexCenter}>
+                <Grid item xs={6}>
+                    <Typography variant="h3" className={classes.title}>DroneDogs Order Form</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                    <img src={logo} className={classes.logo} alt="Drone Dog Alternative" />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField id="numBeefDogs" label="# Beef Dogs" variant="outlined" />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField id="numPorkDogs" label="# Pork Dogs" variant="outlined" />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField id="numTurkeyDogs" label="# Turkey Dogs" variant="outlined" />
+                </Grid>
+                <Grid item xs={12}>
+                    <Button variant="contained" color="primary">Calculate Order</Button>
+                    <Button variant="contained" color="primary">Submit Order</Button>
+                    <Button variant="contained" color="primary">Exit</Button>
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField id="subtotal" label="Subtotal" variant="outlined" disabled />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField id="tax" label="Sales Tax" variant="outlined" disabled />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField id="totalCost" label="Total Cost" variant="outlined" disabled />
+                </Grid>
+            </Grid>
         </div>
         
     );
