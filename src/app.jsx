@@ -13,6 +13,16 @@ const useStyles = makeStyles((theme) => ({
             width: '25ch',
         },
     },
+
+    flex: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignitems: 'center',
+    },
+
+    dialogText: {
+        padding: '2rem',
+    }
 }));
 
 function SimpleDialog(props) {
@@ -22,10 +32,11 @@ function SimpleDialog(props) {
         onClose();
     };
 
+    const classes = useStyles();
+
     return (
         <Dialog onClose={handleClose} aria-labelledby="hello-world-dialog" open={open}>
-            {/* <DialogTitle id="hello-world-dialog-title">Hello World!</DialogTitle> */}
-            <p>Hello World, from Daniel Clancy</p>
+            <p className={classes.dialogText}>Hello World, from Daniel Clancy</p>
         </Dialog>
     );
 }
@@ -48,7 +59,7 @@ export default function App() {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className={classes.flex}>
             <Button variant="contained" color="primary" onClick={handleClickOpen}>Click me</Button>
             <SimpleDialog open={open} onClose={handleClose} />
         </div>
