@@ -14,4 +14,12 @@ to install the dependecies inside the project folder.
 
 Once the dependencies are installed you can use
 
-`npm start` to run the dev server for the app.
+`npm start` 
+
+to run the dev server for the app.
+
+To build the app for your specific platform (Windows, MacOS, Linux) use
+
+`npm run make`
+
+in the project folder.
