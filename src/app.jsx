@@ -68,7 +68,11 @@ export default function App() {
     }, [numBeefDogs, numPorkDogs, numTurkeyDogs]);
 
     const closeApp = useCallback(() => {
-        app.exit(0);
+        window.close();
+    });
+
+    const submitOrder = useCallback(() => {
+        alert("Order submitted!");
     });
 
     return (
@@ -81,27 +85,27 @@ export default function App() {
                 <Grid item xs={6}>
                     <img src={logo} className={classes.logo} alt="Drone Dog Alternative" />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <TextField id="numBeefDogs" label="# Beef Dogs" variant="outlined" onChange={e => setNumBeefDogs(e.target.value)}/>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <TextField id="numPorkDogs" label="# Pork Dogs" variant="outlined" onChange={e => setNumPorkDogs(e.target.value)} />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <TextField id="numTurkeyDogs" label="# Turkey Dogs" variant="outlined" onChange={e => setNumTurkeyDogs(e.target.value)} />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={9}>
                     <Button className={classes.marginRight} variant="contained" color="primary" onClick={calculateTotal}>Calculate Order</Button>
-                    <Button className={classes.marginRight} variant="contained" color="primary">Submit Order</Button>
+                    <Button className={classes.marginRight} variant="contained" color="primary" onClick={submitOrder}>Submit Order</Button>
                     <Button className={classes.marginRight} variant="contained" color="primary" onClick={closeApp}>Exit</Button>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <TextField id="subtotal" label="Subtotal" variant="outlined" value={"$" + subTotal} onChange={e => setSubTotal(e.target.value)} />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <TextField id="tax" label="Sales Tax" variant="outlined" value={"$" + salesTax} onChange={e => setSalesTax(e.target.value)} />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <TextField id="totalCost" label="Total Cost" variant="outlined" value={"$" + totalCost} onChange={e => setTotalCost(e.target.value)} />
                 </Grid>
             </Grid>
